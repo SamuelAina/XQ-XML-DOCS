@@ -62,7 +62,7 @@ See example of this below.
 ```
 This is a very simple example for a very simple type test and question type. Look below to see how the tests are rendered in a Quiz Application.
 
-<div id="questionSetContainer">
+<div id="questionSetContainer" style="border:thin;width:500px;background-color:lightblue;">
   <span>Test:</span>
   <span id="selectContainer"></span>
   <p/>
@@ -163,10 +163,10 @@ var myxml=`
 		currentQuestionSolution=currentQuestion.querySelector('solution_text').innerHTML;
 		currentQuestionHTML=`
 			<span>Question Number ${currentQuestionIdx+1}</span>
-			<p>${currentQuestion.querySelector('question_text').innerHTML}</p>
+			<h3>${currentQuestion.querySelector('question_text').innerHTML}</h3>
 			<span>type your answer here:</span><input id="userAnswer" type="text"></input>
 			<button onclick="checkAnswer()">Check Answer</button><p/>
-			<button onclick="prevQuestion()">Prev</button><button  onclick="nextQuestion()" style="margin-left:230px;">Next</button>			
+			<button onclick="prevQuestion()">Prev</button><button  onclick="nextQuestion()" style="margin-left:330px;">Next</button>			
 		`;
 		console.log(currentQuestionHTML);
 		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;    
@@ -186,4 +186,4 @@ var myxml=`
    }
  }
 </script>
-</html>  
+ 
