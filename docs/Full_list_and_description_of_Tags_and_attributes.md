@@ -4,7 +4,7 @@ title: Full list and description of Tags and attributes
 ## Full list and description of Tags and attributes
 
 <script>
-    var =`
+    var myxml=`
  <QuestionSets title="Three Tests for my students">
    <QuestionSet title="Test 1">
       <Question>
