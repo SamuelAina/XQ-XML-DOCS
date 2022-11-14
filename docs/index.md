@@ -71,8 +71,8 @@ This is a very simple example for a very simple type test and question type. Loo
   </select>
   </span>
   <p>
-  </p><div id="questionContainer">
-		</p></div>
+  </p>
+  <div id="questionContainer"></div>
 </div>
 <script>
 var myxml=`
