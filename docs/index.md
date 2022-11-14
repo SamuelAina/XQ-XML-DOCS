@@ -62,14 +62,23 @@ See example of this below.
 ```
 This is a very simple example for a very simple type test and question type. Look below to see how the tests are rendered in a Quiz Application.
 
-<div id="questionSetContainer" style="border:thin;width:90%;background-color:lightblue;">
+<div id="questionSetContainer" style="border:thin;width:90%;background-color:lightblue;margin:15px;">
   <span>Test:</span>
-  <span id="selectContainer"></span>
-  <p/>
-  <div id="questionContainer">
-  </div>
+  <span id="selectContainer">
+  <select id="questionSetSelid" onchange="selectTest()">
+      <option>(none)</option>
+	  <option>Test 1</option><option>Test 2</option><option>Test 3</option>
+  </select>
+  </span>
+  <p>
+  </p><div id="questionContainer">
+			<span>Question Number 1</span>
+			<h3>Which animal has the longest neck?</h3>
+			<span>type your answer here:</span><input id="userAnswer" type="text">
+			<button onclick="checkAnswer()">Check Answer</button><p>
+			<button onclick="prevQuestion()" style="margin-left:5%;">Prev</button><button onclick="nextQuestion()" style="margin-left:25%;">Next</button>			
+		</p></div>
 </div>
-
 <script>
 var myxml=`
  <QuestionSets title="Three Tests for my students">
@@ -186,4 +195,3 @@ var myxml=`
    }
  }
 </script>
- 
