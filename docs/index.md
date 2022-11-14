@@ -166,7 +166,7 @@ var myxml=`
 			<h3>${currentQuestion.querySelector('question_text').innerHTML}</h3>
 			<span>type your answer here:</span><input id="userAnswer" type="text"></input>
 			<button onclick="checkAnswer()">Check Answer</button><p/>
-			<button onclick="prevQuestion()">Prev</button><button  onclick="nextQuestion()" style="margin-left:330px;">Next</button>			
+			<button onclick="prevQuestion()">Prev</button><button  onclick="nextQuestion()" style="margin-left:45%;">Next</button>			
 		`;
 		console.log(currentQuestionHTML);
 		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;    
