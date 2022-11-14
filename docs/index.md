@@ -75,52 +75,13 @@ This is a very simple example for a very simple type test and question type. Loo
   <div id="questionContainer"></div>
 </div>
 <script>
-var myxml=`
- <QuestionSets title="Three Tests for my students">
-   <QuestionSet title="Test 1">
-      <Question>
-	      <question_text>What is the capital of the United Kingdom?</question_text>
-		  <solution_text>London</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>How many colours are in the rainbow?</question_text>
-		  <solution_text>7</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>How many loaves of bread are in a bakers dozen</question_text>
-		  <solution_text>13</solution_text>
-	  </Question>	  
-   </QuestionSet> 
-   <QuestionSet title="Test 2">
-      <Question>
-	      <question_text>Which animal has the longest neck?</question_text>
-		  <solution_text>Giraffe</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>Which game is played by 11 players on both sides?</question_text>
-		  <solution_text>Football</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>What is the square root of 64?</question_text>
-		  <solution_text>8</solution_text>
-	  </Question>	  
-   </QuestionSet>  
-   <QuestionSet title="Test 3">
-      <Question>
-	      <question_text>What is solid water called?</question_text>
-		  <solution_text>ice</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>How may moths are in a year?</question_text>
-		  <solution_text>12</solution_text>
-	  </Question>
-      <Question>
-	      <question_text>How many pieces are in a chess game?</question_text>
-		  <solution_text>32</solution_text>
-	  </Question>	  
-   </QuestionSet>    
-</QuestionSets>   
-    `
+var currentQuestionIdx=0;
+var currentQuestionSolution;
+var currentNumberOfQuestionsInSet=3;
+
+renderQuestionsets("https://raw.githubusercontent.com/SamuelAina/XQ-XML-DOCS/main/data/Three%20Tests%20for%20my%20students.xml");
+
+function renderXQXML(myxml){
   parser = new DOMParser();
   xmlDoc = parser.parseFromString(myxml,"text/xml");
   questionSets =xmlDoc.getElementsByTagName("QuestionSet");
@@ -135,10 +96,10 @@ var myxml=`
   </select>
   `
   document.getElementById("selectContainer").innerHTML=selectContainerHtml;
+}
 
- var currentQuestionIdx=0;
- var currentQuestionSolution;
- function selectTest(){
+
+function selectTest(){
     currentQuestionIdx=0;
 	selectedValue=document.getElementById("questionSetSelid").value;   
 	selectedQuestionSet = xmlDoc.querySelector('QuestionSet[title="'+selectedValue+'"]')
@@ -147,7 +108,7 @@ var myxml=`
 	}
  } 
  
- function checkAnswer(){
+function checkAnswer(){
     userAnswer = document.getElementById("userAnswer").value;
 	if(userAnswer==""){
 	  alert("Please provide an answer");
@@ -160,13 +121,12 @@ var myxml=`
     }	
  }
  
- var currentNumberOfQuestionsInSet=3;
- function displayCurrentQuestion(){
+function displayCurrentQuestion(){
  		currentQuestion=selectedQuestionSet.getElementsByTagName("Question")[currentQuestionIdx];
 		currentNumberOfQuestionsInSet=selectedQuestionSet.getElementsByTagName("Question").length;
 		currentQuestionSolution=currentQuestion.querySelector('solution_text').innerHTML;
 		currentQuestionHTML=`
-			<span>Question Number ${currentQuestionIdx+1} of ${currentNumberOfQuestionsInSet}</span>
+			<span>Question Number ${currentQuestionIdx+1}</span>
 			<h3>${currentQuestion.querySelector('question_text').innerHTML}</h3>
 			<span>type your answer here:</span><input id="userAnswer" type="text"></input>
 			<button onclick="checkAnswer()">Check Answer</button><p/>
@@ -176,17 +136,31 @@ var myxml=`
 		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;    
  }
  
- function nextQuestion(){
+function nextQuestion(){
    if(currentQuestionIdx<currentNumberOfQuestionsInSet-1){
      currentQuestionIdx=currentQuestionIdx+1;
 	 displayCurrentQuestion();
    }
  }
  
- function prevQuestion(){
+function prevQuestion(){
     if(currentQuestionIdx>0){
      currentQuestionIdx=currentQuestionIdx-1;
 	 displayCurrentQuestion();
    }
  }
+ 
+function renderQuestionsets(url){
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.send(null);
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+		    myxml=request.responseText;
+			renderXQXML(myxml)
+		    return 
+        }
+    }
+}
+
 </script>
