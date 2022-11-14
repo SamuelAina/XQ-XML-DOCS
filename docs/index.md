@@ -62,7 +62,7 @@ See example of this below.
 ```
 This is a very simple example for a very simple type test and question type. Look below to see how the tests are rendered in a Quiz Application.
 
-<div id="questionSetContainer" style="border:thin;width:90%;background-color:lightblue;margin:15px;">
+<div id="questionSetContainer" style="border:thin;height:10%;width:90%;background-color:lightblue;margin:15px;">
   <span>Test:</span>
   <span id="selectContainer">
   <select id="questionSetSelid" onchange="selectTest()">
@@ -72,11 +72,6 @@ This is a very simple example for a very simple type test and question type. Loo
   </span>
   <p>
   </p><div id="questionContainer">
-			<span>Question Number 1</span>
-			<h3>Which animal has the longest neck?</h3>
-			<span>type your answer here:</span><input id="userAnswer" type="text">
-			<button onclick="checkAnswer()">Check Answer</button><p>
-			<button onclick="prevQuestion()" style="margin-left:5%;">Prev</button><button onclick="nextQuestion()" style="margin-left:25%;">Next</button>			
 		</p></div>
 </div>
 <script>
@@ -171,11 +166,11 @@ var myxml=`
 		currentNumberOfQuestionsInSet=selectedQuestionSet.getElementsByTagName("Question").length;
 		currentQuestionSolution=currentQuestion.querySelector('solution_text').innerHTML;
 		currentQuestionHTML=`
-			<span>Question Number ${currentQuestionIdx+1}</span>
+			<span>Question Number ${currentQuestionIdx+1} of ${currentNumberOfQuestionsInSet}</span>
 			<h3>${currentQuestion.querySelector('question_text').innerHTML}</h3>
 			<span>type your answer here:</span><input id="userAnswer" type="text"></input>
 			<button onclick="checkAnswer()">Check Answer</button><p/>
-			<button onclick="prevQuestion()">Prev</button><button  onclick="nextQuestion()" style="margin-left:45%;">Next</button>			
+			<button onclick="prevQuestion()" style="margin-left:2%;">Prev</button><button  onclick="nextQuestion()" style="margin-left:25%;">Next</button>			
 		`;
 		console.log(currentQuestionHTML);
 		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;    
