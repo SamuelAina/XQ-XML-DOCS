@@ -62,7 +62,7 @@ See example of this below.
 ```
 This is a very simple example for a very simple type test and question type. Look below to see how the tests are rendered in a Quiz Application.
 
-<div id="questionSetContainer" class="ui card" style="width:45%;height:50%;">
+<div id="questionSetContainer" class="ui card" style="width:100%;height:70%;">
   <span id="selectContainer"></span>
   <p/>
   <div id="questionContainer">
