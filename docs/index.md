@@ -62,18 +62,23 @@ See example of this below.
 ```
 This is a very simple example for a very simple type test and question type. Look below to see how the tests are rendered in a Quiz Application.
 
-<div id="questionSetContainer" style="border:thin;height:10%;width:90%;background-color:lightblue;margin:15px;">
-  <span>Test:</span>
-  <span id="selectContainer">
-  <select id="questionSetSelid" onchange="selectTest()">
-      <option>(none)</option>
-	  <option>Test 1</option><option>Test 2</option><option>Test 3</option>
-  </select>
-  </span>
-  <p>
-  </p>
-  <div id="questionContainer"></div>
+<div id="questionSetContainer" class="ui card" style="width:45%;height:50%;">
+  <span id="selectContainer"></span>
+  <p/>
+  <div id="questionContainer">
+  </div>
 </div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
+
+<script>
+    $('.ui.dropdown').dropdown();
+</script>
+
 <script>
 var currentQuestionIdx=0;
 var currentQuestionSolution;
@@ -87,7 +92,7 @@ function renderXQXML(myxml){
   questionSets =xmlDoc.getElementsByTagName("QuestionSet");
   
   selectContainerHtml=`
-  <select id="questionSetSelid" onchange="selectTest()">
+  <select class="ui search dropdown"  id="questionSetSelid" onchange="selectTest()">
       <option>(none)</option>
 	  ${Array.from(questionSets)
 	         .map(function(e){return `<option>${e.getAttribute("title")}</option>`})
@@ -96,10 +101,14 @@ function renderXQXML(myxml){
   </select>
   `
   document.getElementById("selectContainer").innerHTML=selectContainerHtml;
+  
+  $('.ui.dropdown').dropdown();
+  $("#selectContainer > div").css("width","100%");
 }
 
 
 function selectTest(){
+    document.getElementById("questionContainer").innerHTML="";
     currentQuestionIdx=0;
 	selectedValue=document.getElementById("questionSetSelid").value;   
 	selectedQuestionSet = xmlDoc.querySelector('QuestionSet[title="'+selectedValue+'"]')
@@ -126,14 +135,22 @@ function displayCurrentQuestion(){
 		currentNumberOfQuestionsInSet=selectedQuestionSet.getElementsByTagName("Question").length;
 		currentQuestionSolution=currentQuestion.querySelector('solution_text').innerHTML;
 		currentQuestionHTML=`
-			<span>Question Number ${currentQuestionIdx+1}</span>
-			<h3>${currentQuestion.querySelector('question_text').innerHTML}</h3>
-			<span>type your answer here:</span><input id="userAnswer" type="text"></input>
-			<button onclick="checkAnswer()">Check Answer</button><p/>
-			<button onclick="prevQuestion()" style="margin-left:2%;">Prev</button><button  onclick="nextQuestion()" style="margin-left:25%;">Next</button>			
+			<br/>
+			<span class="ui ignored warning message"><b>Question Number ${currentQuestionIdx+1}</b></span>
+			<span class="ui info message">${currentQuestion.querySelector('question_text').innerHTML}</span>
+			<br/><br/><br/>
+			<div class="ui container">
+			<label class="ui horizontal huge label">Your answer:</label>
+			<div class="ui input" >
+			<input id="userAnswer" type="text" placeholder="type your answer here..."></input>
+			</div>
+			<button class="ui large primary button" onclick="checkAnswer()">Check Answer</button><br/><br/><br/>
+			<button class="ui large primary button" onclick="prevQuestion()" >Prev</button>
+			<button class="ui large primary button" onclick="nextQuestion()" style="margin-left:23%;">Next</button>
+			</div>			
 		`;
-		console.log(currentQuestionHTML);
-		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;    
+		document.getElementById("questionContainer").innerHTML=currentQuestionHTML;  
+			
  }
  
 function nextQuestion(){
@@ -162,5 +179,6 @@ function renderQuestionsets(url){
         }
     }
 }
+
 
 </script>
