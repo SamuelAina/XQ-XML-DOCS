@@ -139,7 +139,7 @@ function displayCurrentQuestion(){
 			<span class="ui ignored warning message"><b>Question Number ${currentQuestionIdx+1}</b></span>
 			<span class="ui info message">${currentQuestion.querySelector('question_text').innerHTML}</span>
 			<br/><br/><br/>
-			<div class="ui container">
+			<div>
 			<label class="ui horizontal huge label">Your answer:</label>
 			<div class="ui input" >
 			<input id="userAnswer" type="text" placeholder="type your answer here..."></input>
