@@ -138,7 +138,7 @@ function displayCurrentQuestion(){
 			<br/>
 			<span class="ui ignored warning message"><b>Question Number ${currentQuestionIdx+1}</b></span>
 			<br/><br/><br/>
-			<span class="ui huge info message">${currentQuestion.querySelector('question_text').innerHTML}</span>
+			<h2>${currentQuestion.querySelector('question_text').innerHTML}</h2>
 			<br/><br/><br/>
 			<div>
 			<label class="ui horizontal big label">Your answer:</label>
